@@ -44,26 +44,33 @@ const transfer = {
     },
     postTransfer: (req, res) => {
         const {
-            receiverName,
-            receiverAvatar,
-            receiverPhone,
+            sender_id,
+            sender_name,
+            receiver_name,
+            receiver_avatar,
+            receiver_phone,
             amount,
-            balanceLeft,
+            balance_left,
             notes} = req.body;
-      if (receiverName &&
-        receiverAvatar &&
-        receiverPhone &&
+      if (sender_id &&
+        sender_name &&
+        receiver_name &&
+        receiver_avatar &&
+        receiver_phone &&
         amount &&
-        balanceLeft &&
+        balance_left &&
         notes ) {
             //query
             db.query(
-            `INSERT INTO transfer (receiverName,
-                receiverAvatar,
-                receiverPhone,
+            `INSERT INTO transfer (
+                sender_id,
+                sender_name,
+                receiver_name,
+                receiver_avatar,
+                receiver_phone,
                 amount,
-                balanceLeft,
-                notes) VALUES ('${receiverName}', '${receiverAvatar}', '${receiverPhone}', '${amount}', '${balanceLeft}', '${notes}')`,
+                balance_left,
+                notes) VALUES (${sender_id}, '${sender_name}', '${receiver_name}', '${receiver_avatar}', '${receiver_phone}', '${amount}', '${balance_left}', '${notes}')`,
             (err, result, fields) => {
                 if (!err) {
                 res.status(201).send({
@@ -90,20 +97,24 @@ const transfer = {
     patchTransfer: (req, res) => {
         const { id } = req.params;
         const {
-          receiverName = "",
-          receiverAvatar = "",
-          receiverPhone = "",
+          sender_id = "",
+          sender_name = "",
+          receiver_name = "",
+          receiver_avatar = "",
+          receiver_phone = "",
           amount = "",
-          balanceLeft = "",
+          balance_left = "",
           notes = ""
         } = req.body;
         //clear whitespace with trim
         if (
-          receiverName.trim() ||
-          receiverAvatar.trim() ||
-          receiverPhone.trim() ||
+          sender_id.trim() ||
+          sender_name.trim() ||
+          receiver_name.trim() ||
+          receiver_avatar.trim() ||
+          receiver_phone.trim() ||
           amount.trim() ||
-          balanceLeft.trim() ||
+          balance_left.trim() ||
           notes.trim()
         ) {
           db.query(`SELECT * FROM transfer where id=${id}`, (err, result, fields) => {

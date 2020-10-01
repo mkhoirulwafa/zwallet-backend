@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Okt 2020 pada 03.00
+-- Waktu pembuatan: 01 Okt 2020 pada 03.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -56,11 +56,13 @@ INSERT INTO `topup` (`id`, `number`, `title`, `description`) VALUES
 
 CREATE TABLE `transfer` (
   `id` int(16) NOT NULL,
-  `receiverName` varchar(100) NOT NULL,
-  `receiverAvatar` varchar(100) NOT NULL,
-  `receiverPhone` varchar(100) NOT NULL,
+  `sender_id` int(16) NOT NULL,
+  `sender_name` varchar(100) NOT NULL,
+  `receiver_name` varchar(100) NOT NULL,
+  `receiver_avatar` varchar(100) NOT NULL,
+  `receiver_phone` varchar(100) NOT NULL,
   `amount` varchar(100) NOT NULL,
-  `balanceLeft` varchar(100) NOT NULL,
+  `balance_left` varchar(100) NOT NULL,
   `dateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `notes` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -69,9 +71,10 @@ CREATE TABLE `transfer` (
 -- Dumping data untuk tabel `transfer`
 --
 
-INSERT INTO `transfer` (`id`, `receiverName`, `receiverAvatar`, `receiverPhone`, `amount`, `balanceLeft`, `dateTime`, `notes`) VALUES
-(3, 'Taro Momo', 'avatar1.jpg', '6281291291298', '120000', '10000', '2020-09-28 00:24:01', 'Buat beli makan'),
-(4, 'Samuel Suhi', 'avatar22.jpg', '621234567890', '50000', '80000', '2020-09-29 07:00:47', 'Buat beli Cendol');
+INSERT INTO `transfer` (`id`, `sender_id`, `sender_name`, `receiver_name`, `receiver_avatar`, `receiver_phone`, `amount`, `balance_left`, `dateTime`, `notes`) VALUES
+(3, 1, 'Robert Chandler', 'Taro Momo', 'avatar1.jpg', '6281291291298', '120000', '10000', '2020-09-28 00:24:01', 'Buat beli makan'),
+(4, 1, 'Robert Chandler', 'Samuel Suhi', 'avatar22.jpg', '621234567890', '50000', '80000', '2020-09-29 07:00:47', 'Buat beli Cendol'),
+(6, 1, 'Robert Chandler', 'Samuel Suhi', 'avatar22.jpg', '621234567890', '50000', '80000', '2020-10-01 08:51:02', 'Buat beli Cendol');
 
 -- --------------------------------------------------------
 
@@ -142,7 +145,7 @@ ALTER TABLE `topup`
 -- AUTO_INCREMENT untuk tabel `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
