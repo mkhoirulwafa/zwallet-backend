@@ -94,18 +94,18 @@ const users = {
                     data: result,
                 });
                 } else {
-                res.status(500).send({
+                res.status(400).send({
                     success: false,
-                    message: "Internal Server Error",
+                    message: "Failed to create data",
                     data: [],
                 });
                 }
             }
             );
         } else {
-            res.status(400).send({
+            res.status(500).send({
             success: false,
-            message: "Failed to create data",
+            message: "Internal Server Error",
             });
         }
     },
