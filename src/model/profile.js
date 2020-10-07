@@ -3,7 +3,7 @@ const db = require("../helper/db");
 const profile = {
   getByName: (req, res) => {
     let { first, last } = req.params;
-    const query = `SELECT CONCAT(firstName, ' ', lastName) AS fullName, phone, avatar FROM users WHERE firstName LIKE '${first}' AND lastName LIKE '${last}%'`;
+    const query = `SELECT CONCAT(firstName, ' ', lastName) AS fullName, phone, avatar, balance, email FROM users WHERE firstName LIKE '${first}' AND lastName LIKE '${last}%'`;
     db.query(query, (err, result, fields) => {
       if (!err) {
         res.status(200).send({
@@ -22,8 +22,8 @@ const profile = {
     });
   },
   getPersonalById: (req, res) => {
-    let { id } = req.params;
-    const query = `SELECT firstName, lastName, email, phone FROM users WHERE id=${id}`;
+    let { id } = req.query;
+    const query = `SELECT CONCAT(firstName, ' ', lastName) AS fullName, phone, avatar, balance, email FROM users WHERE id=${id}`;
     db.query(query, (err, result, fields) => {
       if (!err) {
         res.status(200).send({
