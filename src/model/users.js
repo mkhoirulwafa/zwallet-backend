@@ -114,8 +114,72 @@ const users = {
       });
     }
   },
+  // patchUser: (req, res) => {
+  //   const { id } = req.params;
+  //   const {
+  //     firstName = "",
+  //     lastName = "",
+  //     avatar = "",
+  //     phone = "",
+  //     email = "",
+  //     password = "",
+  //     balance = "",
+  //     pin = "",
+  //     updateAt = "",
+  //   } = req.body;
+  //   //clear whitespace with trim
+  //   if (
+  //     firstName.trim() ||
+  //     lastName.trim() ||
+  //     avatar.trim() ||
+  //     phone.trim() ||
+  //     email.trim() ||
+  //     password.trim() ||
+  //     balance.trim() ||
+  //     pin.trim() ||
+  //     updateAt.trim()
+  //   ) {
+  //     db.query(`SELECT * FROM users where id=${id}`, (err, result, fields) => {
+  //       if (!err) {
+  //         if (result.length) {
+  //           const data = Object.entries(req.body).map((item) => {
+  //             return parseInt(item[1]) > 0
+  //               ? `${item[0]}=${item[1]}`
+  //               : `${item[0]}='${item[1]}'`;
+  //           });
+  //           console.log(data);
+  //           let query = `UPDATE users SET ${data} WHERE id=${id}`;
+  //           db.query(query, (err, result, fields) => {
+  //             if (result.affectedRows) {
+  //               res.status(200).send({
+  //                 success: true,
+  //                 message: `User ${id} Succesfully updated`,
+  //               });
+  //             } else {
+  //               res.status(400).send({
+  //                 success: false,
+  //                 message: "Failed update user",
+  //               });
+  //             }
+  //           });
+  //         } else {
+  //           res.status(400).send({
+  //             success: false,
+  //             message: "id not found",
+  //           });
+  //         }
+  //       } else {
+  //         console.log(err);
+  //         res.status(500).send({
+  //           success: false,
+  //           message: "Failed update data",
+  //         });
+  //       }
+  //     });
+  //   }
+  // },
   patchUser: (req, res) => {
-    const { id } = req.params;
+    const { email } = req.query;
     const {
       firstName = "",
       lastName = "",
@@ -139,7 +203,7 @@ const users = {
       pin.trim() ||
       updateAt.trim()
     ) {
-      db.query(`SELECT * FROM users where id=${id}`, (err, result, fields) => {
+      db.query(`SELECT * FROM users where email=${email}`, (err, result, fields) => {
         if (!err) {
           if (result.length) {
             const data = Object.entries(req.body).map((item) => {
